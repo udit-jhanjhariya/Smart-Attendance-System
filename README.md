@@ -1,107 +1,83 @@
-# Smart Attendance System
+# FaceTrack AI: Smart Attendance System
 
-A Python-based face recognition system for automated attendance tracking with a graphical user interface. The system uses OpenCV for face detection and recognition, implementing a custom similarity-based approach for face matching.
+A modern, full-stack web application for automated facial recognition and attendance tracking. The system utilizes a robust Python OpenCV backend wrapped in a Flask REST API, paired with a beautiful, fully responsive React & TailwindCSS dashboard.
 
-## Features
+## 🌟 Key Features
 
-- Real-time face detection and recognition
-- User-friendly graphical interface
-- Add new faces through the GUI
-- Automatic attendance marking
-- Attendance history tracking
-- Preview of captured faces
-- Simple CSV-based attendance storage
+- **Real-Time Video Streaming**: Low-latency MJPEG video feed streamed directly from Python to the React UI.
+- **Dynamic Face Recognition**: OpenCV Haar Cascades paired with custom similarity-based face matching algorithms.
+- **In-Browser Employee Registration**: Capture and register new employee faces directly from the web dashboard.
+- **Live Analytical Dashboard**: Instantly tracks attendance records via an embedded CSV database and visualizes daily presence percentages.
+- **One-Click Native Launcher**: Completely skips the terminal using `Start FaceTrack.bat` to boot the full application suite seamlessly.
 
-## Requirements
+## 🛠️ Technology Stack
 
-- Python 3.8+
-- OpenCV (opencv-python) 4.8.1
-- NumPy 1.24.3
-- Pillow 10.0.0
-- tkinter (usually comes with Python)
+- **Backend**: Python 3.8+, Flask, OpenCV, NumPy
+- **Frontend**: React 18, Vite, TailwindCSS v4, Recharts, Lucide Icons
+- **Database**: Local File System (`known faces/`) & CSV Logging (`attendance.csv`)
 
-## Installation
+## 🚀 Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/Uditjhanjhariya/face-recognition-attendance.git
-cd face-recognition-attendance
+git clone https://github.com/udit-jhanjhariya/Smart-Attendance-System.git
+cd Smart-Attendance-System
 ```
 
-2. Install the required packages:
+2. **Install Backend Dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-1. Run the main application:
+3. **Install Frontend Dependencies:**
+Ensure you have [Node.js](https://nodejs.org) installed on your system.
 ```bash
-python main.py
+cd ui
+npm install
 ```
 
-2. Using the System:
-   - Click "Start Camera" to begin the video feed
-   - Click "Add Face" to register a new person
-   - Enter the person's name when prompted
-   - The system will automatically detect and recognize registered faces
-   - Attendance is marked automatically when a face is recognized with high confidence
+## 💻 Usage
 
-## Project Structure
+### The Easiest Way (Windows)
+Simply double click the **`Start FaceTrack.bat`** file in the root of the project! 
+This batch script autonomously launches the Python recognition engine, compiles the Node dashboard, and spawns the UI in a native-looking App Container.
 
+### The Manual Developer Way
+If you wish to modify code and develop manually:
+
+**1. Start the Python API Server:**
+```bash
+python app.py
 ```
+*(The backend will run on `http://127.0.0.1:5000`)*
+
+**2. Start the React UI Server:**
+Open a new terminal window:
+```bash
+cd ui
+npm run dev
+```
+*(Navigate to `http://localhost:5173` in your web browser)*
+
+## 📁 Architecture Structure
+
+```text
 smart-attendance-system/
 │
-├── main.py                 # Main GUI application with face recognition
+├── Start FaceTrack.bat       # Supervised one-click launcher
+├── app.py                    # Flask API & MJPEG camera stream logic
 ├── utils/
-│   └── face_utils.py      # Face detection and recognition utilities
-├── known faces/           # Directory storing known face images
-├── attendance.csv         # Attendance records
-└── requirements.txt       # Project dependencies
+│   └── face_utils.py         # OpenCV detector & recognizer implementation
+├── ui/                       # React + Vite Frontend Workspace
+│   ├── index.html            # Vite entry point
+│   ├── src/                  # React Components (Dashboard, FaceScanner, etc)
+│   └── styles/               # Tailwind definitions and CSS variables
+├── known faces/              # Encoded JPG/PNG facial databases
+├── attendance.csv            # Parsed daily attendance logs
+└── requirements.txt          # Python dependencies
 ```
 
-## How It Works
-
-1. **Face Detection**: Uses OpenCV's Haar Cascade Classifier to detect faces in the video feed.
-
-2. **Face Recognition**: 
-   - Implements a custom similarity-based approach
-   - Uses normalized cross-correlation and structural similarity
-   - Requires multiple consecutive matches for reliable recognition
-   - Applies histogram equalization for better contrast
-
-3. **Attendance System**:
-   - Automatically marks attendance when a face is recognized
-   - Stores records in CSV format with timestamp
-   - Prevents duplicate entries in the same session
-
-## Configuration
-
-- Face detection parameters can be adjusted in `FaceDetector` class
-- Recognition threshold is set to 0.65 by default
-- Requires 2 consecutive matches for attendance marking
-- Face images are standardized to 100x100 pixels
-
-## Error Handling
-
-The system includes comprehensive error handling for:
-- Camera initialization failures
-- Face detection issues
-- Image saving/loading problems
-- Recognition errors
-- File system operations
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-## Acknowledgments
-
-- OpenCV for computer vision capabilities
-- NumPy for numerical operations
-- Tkinter for GUI components 
+## ⚙️ Configuration
+- The default confidence recognition threshold is `0.65` in `FaceRecognizer`.
+- Bounding-box detection frame updates asynchronously for peak performance.
+- The React Development proxy forwards all `/api` calls safely through port `5000` avoiding CORS issues.
