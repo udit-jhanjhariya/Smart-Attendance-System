@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Node
+ui/node_modules/
+ui/dist/
+ui/.npm
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.bat
